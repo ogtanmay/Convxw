@@ -5,6 +5,7 @@
 
 package com.convx.music.utils
 
+import com.convx.music.constants.AppRepository
 import android.content.Context
 import com.convx.music.R
 import com.convx.music.db.entities.Song
@@ -62,7 +63,7 @@ class DiscordRPC(
                 button2Text.ifEmpty { "Visit Convx" },
                 song
             )
-            buttonsList.add(resolvedText to "https://github.com/cosmictaserdev-creator/Convx")
+            buttonsList.add(resolvedText to AppRepository.URL)
         }
 
         val type = when (activityType) {

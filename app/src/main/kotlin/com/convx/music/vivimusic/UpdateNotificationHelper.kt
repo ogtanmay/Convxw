@@ -1,5 +1,6 @@
 package com.convx.music.vivimusic
 
+import com.convx.music.constants.AppRepository
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -32,9 +33,9 @@ object UpdateNotificationHelper {
 
         // Direct download URL format from vivimusicupdater - use the full tag (vX.X.X or bX.X.X) or nightly link
         val apkUrl = if (versionName.contains("nightly", ignoreCase = true)) {
-            "https://nightly.link/cosmictaserdev-creator/Convx/workflows/nightly.yml/main/convx-gms-nightly.zip"
+            AppRepository.NIGHTLY_DOWNLOAD_URL
         } else {
-            "https://github.com/cosmictaserdev-creator/Convx/releases/download/$versionName/convx-$versionName.apk"
+            AppRepository.releaseApkUrl(versionName)
         }
         val intent = Intent(Intent.ACTION_VIEW, apkUrl.toUri())
 

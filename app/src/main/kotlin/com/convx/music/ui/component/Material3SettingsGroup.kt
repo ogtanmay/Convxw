@@ -60,16 +60,27 @@ fun Material3SettingsGroup(
             )
         }
 
-        // One solid grouped card with hairline dividers, instead of per-item
-        // floating M3 cards. Theme-adaptive surface/outline instead of
-        // AppleTokens' fixed dark tokens — the row content below (title/
-        // description/icon tint) already reads MaterialTheme.colorScheme, so a
-        // fixed-dark card went black-on-black in light theme.
+        // Use the app backdrop for one shared liquid-glass surface rather than
+        // making every row a separate glass layer.
+        val cardShape = RoundedCornerShape(AppleTokens.CardCorner)
+        val glassConfig = LocalGlassEffectConfig.current
+        val useGlass = glassConfig.globalEnabled && isGlassAllowed()
+        val surfaceModifier = if (useGlass) {
+            Modifier.liquidGlass(
+                config = glassConfig,
+                shape = cardShape,
+                applyEdgeEffects = false,
+            )
+        } else {
+            Modifier
+                .clip(cardShape)
+                .background(MaterialTheme.colorScheme.surfaceContainer)
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(AppleTokens.CardCorner))
-                .background(MaterialTheme.colorScheme.surfaceContainer)
+                .clip(cardShape)
+                .then(surfaceModifier)
         ) {
             items.forEachIndexed { index, item ->
                 if (index > 0) {

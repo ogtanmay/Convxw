@@ -2,6 +2,7 @@
 
 package com.convx.music
 
+import com.convx.music.constants.AppRepository
 import android.Manifest
 import android.app.NotificationManager
 import android.content.Context
@@ -541,7 +542,7 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 )
                             },
                             onClick = {
-                                uriHandler.safeOpenUri(context, "https://github.com/cosmictaserdev-creator/Convx")
+                                uriHandler.safeOpenUri(context, AppRepository.URL)
                             }
                         )
 

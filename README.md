@@ -3,13 +3,8 @@
   <h3>Convx is an open-source, Liquid Glass music player for Android</h3>
 
   <p>
-    <a href="https://github.com/cosmictaserdev-creator/Convx/releases/tag/v1.5.2">
-      <img src="https://img.shields.io/badge/%E2%AC%87%EF%B8%8F%20DOWNLOAD%20CONVX%201.5.2-4CAF50?style=for-the-badge&logo=android&logoColor=white" alt="Download Convx 1.5.2">
-    </a>
-  </p>
-  <p>
-    <b><a href="https://github.com/cosmictaserdev-creator/Convx/releases/tag/v1.5.2">⬇️ DOWNLOAD CONVX 1.5.2</a></b>
-    — Latest release. Works on Android 8.0+.
+    <b><a href="https://github.com/ogtanmay/Convxw">Browse the Convx source on GitHub</a></b>
+    — Native Android app. Works on Android 8.0+.
   </p>
 
   <h3>📸 Screenshots</h3>
@@ -43,26 +38,15 @@
   </div>
 
   <p>
-    <a href="https://github.com/cosmictaserdev-creator/Convx/releases">
-      <img src="https://img.shields.io/github/downloads/cosmictaserdev-creator/Convx/total?style=for-the-badge&color=blue" alt="Downloads">
+    <a href="https://github.com/ogtanmay/Convxw/releases">
+      <img src="https://img.shields.io/github/downloads/ogtanmay/Convxw/total?style=for-the-badge&color=blue" alt="Downloads">
     </a>
     <a href="LICENSE">
-      <img src="https://img.shields.io/github/license/cosmictaserdev-creator/Convx?style=for-the-badge" alt="License">
+      <img src="https://img.shields.io/github/license/ogtanmay/Convxw?style=for-the-badge" alt="License">
     </a>
     <a href="https://discord.gg/Ejeb4cmzfd">
       <img src="https://img.shields.io/badge/Discord-Join%20Us-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join Discord">
     </a>
-    <a href="https://ko-fi.com/cosmictaser">
-      <img src="https://img.shields.io/badge/Ko--fi-Support%20Us-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white" alt="Support on Ko-fi">
-    </a>
-    <a href="https://cosmictaser.de5.net">
-      <img src="https://img.shields.io/badge/Convx-Website-8A2BE2?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Visit Convx Website">
-    </a>
-  </p>
-  <p>
-    ☕ <b>Support:</b> <a href="https://ko-fi.com/cosmictaser">Ko-fi</a> &nbsp;•&nbsp;
-    💸 <b>UPI:</b> <code>cosmictaser@okicici</code> &nbsp;•&nbsp;
-    🌐 <b>Website:</b> <a href="https://cosmictaser.de5.net">cosmictaser.de5.net</a>
   </p>
 </div>
 
@@ -202,9 +186,9 @@
         </a>
         <br><br>
         <sub>
-          <a href="https://github.com/cosmictaserdev-creator/Convx/issues">🐞 Report Bugs</a> &nbsp;•&nbsp;
-          <a href="https://github.com/cosmictaserdev-creator/Convx/discussions">💬 Discussions</a> &nbsp;•&nbsp;
-          <a href="https://github.com/cosmictaserdev-creator/Convx/releases">🚀 Releases</a>
+          <a href="https://github.com/ogtanmay/Convxw/issues">🐞 Report Bugs</a> &nbsp;•&nbsp;
+          <a href="https://github.com/ogtanmay/Convxw/discussions">💬 Discussions</a> &nbsp;•&nbsp;
+          <a href="https://github.com/ogtanmay/Convxw/releases">🚀 Releases</a>
         </sub>
       </td>
     </tr>
@@ -217,7 +201,7 @@
 
   <h2>🙏 Credits</h2>
 
-  <p>Convx is developed and maintained by <a href="https://github.com/cosmictaserdev-creator">Aryan (CosmicTaser)</a>. See <a href="https://cosmictaser.de5.net">cosmic-taser.netlify.app</a> for the portfolio.</p>
+  <p>Convx is developed and maintained by <a href="https://github.com/ogtanmay">Tanmay</a>.</p>
 
   <table border="0" cellpadding="10" cellspacing="0" width="90%">
     <tr valign="top">
@@ -231,6 +215,7 @@
       <td width="60%" align="left">
         <b>🎖️ Foundational Projects</b>
         <ul>
+          <li><strong><a href="https://github.com/Kyant0/AndroidLiquidGlass">Kyant0/AndroidLiquidGlass</a></strong> — Liquid Glass controls and visual components used across settings and sliders.</li>
           <li><strong><a href="https://github.com/Kyant0/backdrop">Kyant0/backdrop</a></strong> — the real-time backdrop blur/refraction library the Liquid Glass UI is built on.</li>
           <li><strong><a href="https://github.com/better-lyrics/better-lyrics">Better Lyrics</a></strong> and <strong><a href="https://github.com/maxrave-dev/SimpMusic">SimpMusic</a></strong> — synced lyrics.</li>
           <li><strong><a href="https://github.com/ibratabian17/YouLyPlus">YouLyPlus</a></strong> — in-app lyrics styling.</li>

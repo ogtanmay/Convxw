@@ -49,7 +49,7 @@ import androidx.compose.material3.OutlinedButton
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import androidx.compose.material3.OutlinedTextField
 import com.convx.music.ui.utils.appTopBarWindowInsets
-import androidx.compose.material3.Slider
+import com.convx.music.ui.component.LiquidSettingsSlider as Slider
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import androidx.compose.material3.Text
 import com.convx.music.ui.utils.appTopBarWindowInsets
@@ -520,6 +520,7 @@ fun LastFMSettings(
                         value = tempMinTrackDuration.toFloat(),
                         onValueChange = { tempMinTrackDuration = it.toInt() },
                         valueRange = 10f..60f,
+                        steps = 49,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -650,6 +651,7 @@ fun LastFMSettings(
                         value = tempScrobbleDelaySeconds.toFloat(),
                         onValueChange = { tempScrobbleDelaySeconds = it.toInt() },
                         valueRange = 30f..360f,
+                        steps = 329,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

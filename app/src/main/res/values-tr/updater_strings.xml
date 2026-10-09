@@ -56,7 +56,7 @@
     <string name="collaborator_section">İŞBİRLİKÇİ</string>
     <string name="app_info_section">UYGULAMA BİLGİSİ</string>
     <string name="community_section">TOPLULUK</string>
-    <string name="developer_name">VIVIDH P ASHOKAN</string>
+    <string name="developer_name">Tanmay</string>
     <string name="app_developer">Uygulama Geliştiricisi</string>
     <string name="website">Web sitesi</string>
     <string name="collaborator_tboyke">T-Boyke</string>
@@ -68,8 +68,6 @@
     <string name="see_community_heroes">Topluluk kahramanlarımızı görün</string>
     <string name="report_issue_title_about">Sorun Bildir</string>
     <string name="bugs_feedback">Hatalar ve Geri Bildirimler</string>
-    <string name="donate">Bağış Yap</string>
-    <string name="support_development">Geliştirmeyi Destekle</string>
     <string name="beta_updates">Beta Güncellemeleri</string>
     <string name="beta_updates_subtitle">Beta güncellemeleri almak istiyorsanız bunu etkinleştirin (örn. b5.0.1)</string>
 </resources>

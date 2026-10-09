@@ -58,7 +58,7 @@
     <string name="collaborator_section">COLLABORATEUR</string>
     <string name="app_info_section">INFORMATIONS SUR L\'APPLICATION</string>
     <string name="community_section">COMMUNAUTÉ</string>
-    <string name="developer_name">VIVIDH P ASHOKAN</string>
+    <string name="developer_name">Tanmay</string>
     <string name="app_developer">Développeur d\'applications</string>
     <string name="website">Site web</string>
     <string name="collaborator_tboyke">T-Boyke</string>
@@ -70,8 +70,6 @@
     <string name="see_community_heroes">Découvrez les héros de notre communauté</string>
     <string name="report_issue_title_about">Signaler un problème</string>
     <string name="bugs_feedback">Bugs &amp; Commentaires</string>
-    <string name="donate">Faire un don</string>
-    <string name="support_development">Soutenir le développement</string>
     <string name="beta_updates">Mises à jour de la version bêta</string>
     <string name="beta_updates_subtitle">Activez cette option si vous souhaitez recevoir les mises à jour bêta (par exemple, b5.0.1)</string>
     <string name="on_latest_version">Vous utilisez la dernière version.</string>

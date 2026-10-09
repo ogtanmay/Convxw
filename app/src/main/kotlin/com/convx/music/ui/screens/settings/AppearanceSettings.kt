@@ -140,7 +140,7 @@ import com.convx.music.constants.HideHomeFavoriteIconKey
 import com.convx.music.constants.ShowHomeFabKey
 import com.convx.music.ui.utils.GridColumnChoices
 import com.convx.music.ui.utils.GridSpacingChoices
-import androidx.compose.material3.Slider
+import com.convx.music.ui.component.LiquidSettingsSlider as Slider
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import com.convx.music.constants.HidePlayerThumbnailKey
 import com.convx.music.ui.utils.appTopBarWindowInsets

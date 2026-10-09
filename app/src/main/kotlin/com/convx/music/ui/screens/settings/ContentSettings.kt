@@ -63,7 +63,7 @@ import androidx.compose.material3.Icon
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import androidx.compose.material3.OutlinedTextField
 import com.convx.music.ui.utils.appTopBarWindowInsets
-import androidx.compose.material3.Slider
+import com.convx.music.ui.component.LiquidSettingsSlider as Slider
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import com.convx.music.ui.component.GlassSwitchCompat as Switch
 import com.convx.music.ui.utils.appTopBarWindowInsets

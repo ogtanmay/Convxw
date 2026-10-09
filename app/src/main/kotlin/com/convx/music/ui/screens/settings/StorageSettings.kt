@@ -37,7 +37,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import androidx.compose.material3.MaterialTheme
 import com.convx.music.ui.utils.appTopBarWindowInsets
-import androidx.compose.material3.Slider
+import com.convx.music.ui.component.LiquidSettingsSlider as Slider
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import androidx.compose.material3.Text
 import com.convx.music.ui.utils.appTopBarWindowInsets

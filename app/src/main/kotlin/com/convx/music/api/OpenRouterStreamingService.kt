@@ -5,6 +5,7 @@
 
 package com.convx.music.api
 
+import com.convx.music.constants.AppRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -120,7 +121,7 @@ Output MUST be a JSON array with EXACTLY $lineCount strings."""
                     }
                 }
                 .addHeader("Content-Type", "application/json")
-                .addHeader("HTTP-Referer", "https://github.com/CryptoLiveApp/vivimusic")
+                .addHeader("HTTP-Referer", AppRepository.URL)
                 .addHeader("X-Title", "vivimusic")
                 .post(jsonBody.toString().toRequestBody(JSON))
                 .build()

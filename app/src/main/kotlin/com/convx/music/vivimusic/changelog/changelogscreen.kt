@@ -1,5 +1,6 @@
 package com.convx.music.vivimusic.changelog
 
+import com.convx.music.constants.AppRepository
 
 
 import android.content.Context
@@ -141,7 +142,7 @@ fun ChangelogScreen(
                         showingCached = true
                     }
                 } else {
-                    val changelogUrl = URL("https://github.com/cosmictaserdev-creator/Convx/releases/download/$tag/changelog.json")
+                    val changelogUrl = URL(AppRepository.releaseChangelogUrl(tag))
                     val connection = changelogUrl.openConnection() as HttpURLConnection
                     connection.setRequestProperty("User-Agent", "ViviMusic-Changelog-App")
                     connection.setRequestProperty("Accept", "application/json")
@@ -214,7 +215,7 @@ fun ChangelogScreen(
         isFetchingOldReleases = true
         coroutineScope.launch(Dispatchers.IO) {
             try {
-                val releasesUrl = URL("https://api.github.com/repos/cosmictaserdev-creator/Convx/releases")
+                val releasesUrl = URL("${AppRepository.API_URL}/releases")
                 val connection = releasesUrl.openConnection() as HttpURLConnection
                 connection.setRequestProperty("User-Agent", "ViviMusic-Changelog-App")
                 connection.setRequestProperty("Accept", "application/vnd.github+json")

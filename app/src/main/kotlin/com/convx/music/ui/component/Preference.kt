@@ -23,7 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Slider
 import com.convx.music.ui.component.GlassSwitchCompat as Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -322,10 +321,11 @@ fun SliderPreference(
 
                     Spacer(Modifier.height(16.dp))
 
-                    Slider(
+                    LiquidSettingsSlider(
                         value = sliderValue,
                         onValueChange = { sliderValue = it },
                         valueRange = 15f..60f,
+                        steps = 44,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }

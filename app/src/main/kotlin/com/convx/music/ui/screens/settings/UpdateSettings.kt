@@ -1,5 +1,6 @@
 package com.convx.music.ui.screens.settings
 
+import com.convx.music.constants.AppRepository
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import androidx.compose.foundation.layout.Column
@@ -162,7 +163,7 @@ fun UpdateSettings(
                     onClick = {
                         val isFoss = !BuildConfig.CAST_AVAILABLE
                         if (isFoss) {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/cosmictaserdev-creator/Convx"))
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(AppRepository.URL))
                             context.startActivity(intent)
                         } else {
                             navController.navigate("update")
