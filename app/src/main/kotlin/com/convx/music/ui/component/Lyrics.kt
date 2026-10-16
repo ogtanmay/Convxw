@@ -865,9 +865,9 @@ fun Lyrics(
                 isLoading = lyrics == null,
                 lyricsNotFound = lyrics == LYRICS_NOT_FOUND ||
                     (lyrics != null && lines.none { it.text.isNotBlank() }),
-                trackId = mediaMetadata.mediaId,
-                trackTitle = mediaMetadata.title?.toString().orEmpty(),
-                trackArtist = mediaMetadata.artist?.toString().orEmpty(),
+                trackId = mediaMetadata?.id.orEmpty(),
+                trackTitle = mediaMetadata?.title.orEmpty(),
+                trackArtist = mediaMetadata?.artists?.joinToString { it.name }.orEmpty(),
                 canSeek = isSynced && !isGuest,
                 onSeek = { time -> playerConnection.seekTo((time - lyricsOffset).coerceAtLeast(0L)) },
             )

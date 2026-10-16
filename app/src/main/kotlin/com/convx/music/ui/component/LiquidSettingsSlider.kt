@@ -5,9 +5,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.progressBarRangeInfo
-import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.unit.dp
@@ -68,7 +66,6 @@ fun LiquidSettingsSlider(
         modifier = modifier
             .heightIn(min = 48.dp)
             .semantics {
-                role = Role.Slider
                 progressBarRangeInfo = ProgressBarRangeInfo(
                     current = snapToStep(safeValue),
                     range = valueRange,
