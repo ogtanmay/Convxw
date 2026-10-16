@@ -526,6 +526,16 @@
     <string name="apple_music_lyrics_blur_desc">Apply blur to inactive lyrics lines for a premium focus effect</string>
     <string name="lyrics_v2_fluid">Lyrics V2 (Fluid)</string>
     <string name="lyrics_animation_metro">MetroLyrics</string>
+    <string name="red_thread_lyrics">The Red Thread</string>
+    <string name="standard_lyrics_view">Standard lyrics</string>
+    <string name="red_thread_loading_title">Gathering the words</string>
+    <string name="red_thread_loading_detail">The song will keep playing while lyrics load.</string>
+    <string name="red_thread_no_lyrics_title">No lyrics found</string>
+    <string name="red_thread_no_lyrics_detail">Try fetching lyrics from the player’s lyrics menu.</string>
+    <string name="red_thread_waiting_title">Waiting for the first line</string>
+    <string name="red_thread_waiting_detail">The red thread will follow when the first timed line begins.</string>
+    <string name="red_thread_unsynced_title">These lyrics don’t include playback timestamps.</string>
+    <string name="red_thread_unsynced_detail">Switch to standard lyrics to browse the full text.</string>
     <string name="lyrics_text_size">Lyrics text size</string>
     <string name="lyrics_line_spacing">Lyrics line spacing</string>
     <string name="album_art_for">Album art for %s</string>

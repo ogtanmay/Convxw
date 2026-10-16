@@ -470,6 +470,7 @@ fun AppearanceSettings(
                     LyricsAnimationStyle.VIVIMUSIC_1 -> stringResource(R.string.vivimusic_1)
                     LyricsAnimationStyle.LYRICS_V2 -> stringResource(R.string.lyrics_v2_fluid)
                     LyricsAnimationStyle.METRO_LYRICS -> stringResource(R.string.lyrics_animation_metro)
+                    LyricsAnimationStyle.RED_THREAD -> stringResource(R.string.red_thread_lyrics)
                 }
             }
         )
@@ -970,6 +971,7 @@ fun AppearanceSettings(
                                 LyricsAnimationStyle.APPLE_V2 -> stringResource(R.string.apple_music_style_letter)
                                 LyricsAnimationStyle.LYRICS_V2 -> stringResource(R.string.lyrics_v2_fluid)
                                 LyricsAnimationStyle.METRO_LYRICS -> stringResource(R.string.lyrics_animation_metro)
+                                LyricsAnimationStyle.RED_THREAD -> stringResource(R.string.red_thread_lyrics)
                             }
                         )
                     },

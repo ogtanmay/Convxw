@@ -229,7 +229,13 @@ fun Lyrics(
     val romanizeHindiLyrics by rememberPreference(LyricsRomanizeHindiKey, true)
     val romanizePunjabiLyrics by rememberPreference(LyricsRomanizePunjabiKey, true)
     val lyricsGlowEffect by rememberPreference(LyricsGlowEffectKey, true)
-    val lyricsAnimationStyle by rememberEnumPreference(LyricsAnimationStyleKey, LyricsAnimationStyle.APPLE)
+    val (lyricsAnimationStyle, onLyricsAnimationStyleChange) = rememberEnumPreference(
+        LyricsAnimationStyleKey,
+        LyricsAnimationStyle.APPLE,
+    )
+    var previousLyricsAnimationStyle by rememberSaveable {
+        mutableStateOf(LyricsAnimationStyle.APPLE)
+    }
     val lyricsTextSize by rememberPreference(LyricsTextSizeKey, 30f)
     val lyricsLineSpacing by rememberPreference(LyricsLineSpacingKey, 1.3f)
     val lyricsStandardBlur by rememberPreference(LyricsStandardBlurKey, false)
@@ -725,6 +731,35 @@ fun Lyrics(
             .fillMaxSize()
             .padding(bottom = 12.dp)
     ) {
+        FilledTonalButton(
+            onClick = {
+                if (lyricsAnimationStyle == LyricsAnimationStyle.RED_THREAD) {
+                    onLyricsAnimationStyleChange(
+                        previousLyricsAnimationStyle.takeUnless { it == LyricsAnimationStyle.RED_THREAD }
+                            ?: LyricsAnimationStyle.APPLE
+                    )
+                } else {
+                    previousLyricsAnimationStyle = lyricsAnimationStyle
+                    onLyricsAnimationStyleChange(LyricsAnimationStyle.RED_THREAD)
+                }
+            },
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 48.dp, end = 16.dp)
+                .zIndex(3f),
+        ) {
+            Text(
+                text = stringResource(
+                    if (lyricsAnimationStyle == LyricsAnimationStyle.RED_THREAD) {
+                        R.string.standard_lyrics_view
+                    } else {
+                        R.string.red_thread_lyrics
+                    }
+                ),
+                fontSize = 11.sp,
+            )
+        }
+
         // Status UI for translation
         Box(
             modifier = Modifier
@@ -820,7 +855,23 @@ fun Lyrics(
             }
         }
 
-        if (lyrics == LYRICS_NOT_FOUND) {
+        if (lyricsAnimationStyle == LyricsAnimationStyle.RED_THREAD) {
+            val lyricsOffset = currentSong?.song?.lyricsOffset?.toLong() ?: 0L
+            RedThreadLyrics(
+                lines = lines,
+                activeLineIndex = currentLineIndex,
+                playbackPositionMs = currentPlaybackPosition + lyricsOffset,
+                isSynced = isSynced,
+                isLoading = lyrics == null,
+                lyricsNotFound = lyrics == LYRICS_NOT_FOUND ||
+                    (lyrics != null && lines.none { it.text.isNotBlank() }),
+                trackId = mediaMetadata.mediaId,
+                trackTitle = mediaMetadata.title?.toString().orEmpty(),
+                trackArtist = mediaMetadata.artist?.toString().orEmpty(),
+                canSeek = isSynced && !isGuest,
+                onSeek = { time -> playerConnection.seekTo((time - lyricsOffset).coerceAtLeast(0L)) },
+            )
+        } else if (lyrics == LYRICS_NOT_FOUND) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center

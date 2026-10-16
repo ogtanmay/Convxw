@@ -1,0 +1,161 @@
+You are a senior motion graphics designer, creative developer, Flutter engineer, and music-player integration specialist.
+
+YOUR MISSION
+
+Create a premium, reusable, pre-designed animated lyric template and integrate it directly into my EXISTING music application.
+
+You must complete BOTH tasks:
+1. Design and implement the motion-graphics lyric template.
+2. Integrate that template into the existing Lyrics section so it automatically animates the real lyrics during music playback.
+
+Do not stop after designing the animation.
+Do not stop after creating a standalone demo.
+Complete the integration in the existing repository.
+
+REFERENCE
+
+Use Lyric-Video-Process-Guide.pdf, especially its PYAAR? by Naam Sujal motion-design project, as the creative reference if the file is available.
+
+The visual quality should resemble professionally art-directed kinetic typography, editorial motion graphics, semantic visual metaphors, and continuous transitions.
+
+IMPORTANT PRODUCT REQUIREMENT
+
+My music application ALREADY WORKS.
+Music playback and live synchronized lyrics already exist.
+
+Users must NOT have to manually create animations, select keyframes, write prompts, or configure individual words.
+
+The app must automatically display the current song's existing lyrics through a pre-designed animation template.
+
+This is a TEMPLATE-BASED SYSTEM, NOT an AI VIDEO-GENERATION SERVICE.
+
+Do not call an external AI API every time a lyric changes.
+Do not generate a separate MP4 for every song.
+Do not rebuild the player, audio service, or lyrics synchronization system.
+
+PHASE 1 — INSPECT THE REPOSITORY
+
+Before changing anything:
+- Identify the app framework and architecture.
+- Locate the existing music player, playback controller, Lyrics screen, lyrics data model, and state management.
+- Determine how the current lyric line, word highlighting, timestamps, and playback position are represented.
+- Inspect existing animation libraries, typography, fonts, themes, and navigation.
+- Locate the reference PDF if available.
+- Identify build and test commands.
+
+Reuse the actual project implementation. Do not guess class names, file paths, providers, or data types.
+
+PHASE 2 — DESIGN THE MOTION TEMPLATE
+
+Create one polished template named "The Red Thread".
+
+ART DIRECTION:
+- Warm ivory and textured paper.
+- Deep black editorial compositions.
+- Restrained vermilion-red accents.
+- Bold typography with dramatic differences in size, weight, alignment, and spacing.
+- Subtle grain, print imperfections, drawn lines, stamps, and original geometric illustrations.
+- Asymmetrical layouts and deliberate negative space.
+- Physically convincing movement with anticipation, inertia, impact, overshoot, and follow-through.
+
+ANIMATION SYSTEM:
+
+1. Phrase reveals using masks, clipping, ink-like reveals, and carefully staggered typography.
+2. Active-line or active-word emphasis driven by existing lyric state.
+3. A red thread that can become an underline, drawn stroke, crack, or transition.
+4. Reusable graphic motifs that interact with text instead of appearing as unrelated stickers.
+5. Connected scene transitions in which existing elements create or reveal the next composition.
+6. Restrained rhythmic accents using existing beat data if available.
+7. Multiple distinct compositions rather than repeating the same effect for every line.
+
+The result must look like a motion designer created it, not like ordinary subtitles with random effects.
+
+Use meaningful visual metaphors when appropriate. If semantic analysis or metadata is unavailable, use the template's designed typography treatments rather than making unreliable assumptions about lyric meaning.
+
+PHASE 3 — MAKE THE TEMPLATE REUSABLE
+
+Separate the implementation into logical components, such as:
+- Animation primitives
+- Typography and text layout
+- Scene compositions
+- Backgrounds and textures
+- Graphic assets
+- Transitions
+- Playback and lyric-state adapter
+- Template configuration
+
+Use the repository's actual framework and libraries.
+
+If this is Flutter, implement the experience natively using suitable Flutter animation APIs, CustomPainter, clipping, transforms, and vector assets where appropriate.
+
+Do not introduce Remotion, React, or a separate web rendering engine into a native Flutter app unless the existing architecture genuinely requires it.
+
+Do not add unnecessary dependencies.
+
+The template must accept live lyric data as input and render it without hardcoded production lyrics.
+
+PHASE 4 — INTEGRATE WITH THE EXISTING LYRICS
+
+Connect the finished template to the existing Lyrics section.
+
+Requirements:
+- Reuse the current lyrics provider and playback controller.
+- Reuse existing lyric timestamps and active-line or active-word state.
+- Keep the current music playback running continuously.
+- Update animations in response to playback position.
+- Handle pause, resume, seek, replay, and track changes.
+- Handle lyrics loading, missing lyrics, and empty lyrics gracefully.
+- Support Hindi/Devanagari, Hinglish, English, punctuation, and mixed scripts.
+- Preserve correct Unicode shaping, conjuncts, and vowel marks.
+- Avoid splitting raw Unicode characters in ways that break text rendering.
+- Respect the existing app theme, navigation, screen size, and safe areas.
+- Maintain smooth performance without unnecessary rebuilds.
+
+If the app provides only line-level timing, synchronize at the line level. Do not invent word-level timestamps.
+
+If lyrics are already synchronized, do not run forced alignment again.
+
+Keep the existing standard lyrics experience functional. Add a sensible way to open or switch to the animated lyrics view without breaking current controls or navigation.
+
+PHASE 5 — PERFORMANCE AND QUALITY
+
+- Keep animation timing deterministic.
+- Avoid expensive calculations on every frame.
+- Cache reusable assets where appropriate.
+- Avoid memory leaks and unnecessary animation controllers.
+- Dispose of resources correctly.
+- Respect reduced-motion or accessibility preferences where supported.
+- Ensure the animation never blocks audio playback.
+- Do not add backend infrastructure or AI services unless genuinely required.
+
+PHASE 6 — TEST AND VERIFY
+
+After implementation:
+1. Run the project's available formatting, analysis, tests, and build.
+2. Fix errors introduced by your changes.
+3. Test lyric changes during playback, pause/resume, seeking, and track changes.
+4. Check Devanagari rendering and mixed-script lyrics.
+5. Inspect the actual rendered UI or capture screenshots if the environment permits.
+6. Check for clipping, unreadable text, abrupt transitions, and performance problems.
+7. Verify that the original player and standard lyrics still work.
+
+Do not claim a test passed unless you actually ran it.
+
+FINAL DELIVERABLES
+
+- A complete reusable motion-graphics lyric template.
+- Integration into the existing Lyrics section.
+- Required components, assets, and configuration.
+- A working example using the app's actual lyric data.
+- Tests and build fixes where needed.
+- A concise report of modified files, architecture, tests, and any remaining limitations.
+
+EXECUTION RULES
+
+Inspect first, then plan, then implement.
+Make changes directly in the existing repository.
+Do not return only a tutorial, mockup, pseudocode, or implementation plan.
+Do not replace working features unnecessarily.
+Do not stop for approval between template creation and integration.
+Make reasonable design decisions autonomously.
+Finish both the animation template and its integration before reporting completion.
