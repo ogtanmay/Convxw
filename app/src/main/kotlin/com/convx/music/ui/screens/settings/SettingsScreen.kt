@@ -54,11 +54,8 @@ import androidx.navigation.NavController
 import com.convx.music.BuildConfig
 import com.convx.music.LocalPlayerAwareWindowInsets
 import com.convx.music.ui.component.IconButton
-import com.convx.music.ui.component.LocalGlassEffectConfig
 import com.convx.music.ui.component.Material3SettingsGroup
 import com.convx.music.ui.component.Material3SettingsItem
-import com.convx.music.ui.component.isGlassAllowed
-import com.convx.music.ui.component.liquidGlass
 import com.convx.music.ui.theme.AppleTokens
 import com.convx.music.ui.utils.appTopBarWindowInsets
 import com.convx.music.ui.utils.backToMain
@@ -362,26 +359,13 @@ private fun SettingsSection(
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val shape = RoundedCornerShape(AppleTokens.CardCorner)
-    val glassConfig = LocalGlassEffectConfig.current
-    val useGlass = glassConfig.globalEnabled && isGlassAllowed()
-    val surfaceModifier = if (useGlass) {
-        Modifier.liquidGlass(
-            config = glassConfig,
-            shape = shape,
-            applyEdgeEffects = false,
-        )
-    } else {
-        Modifier
-            .clip(shape)
-            .background(MaterialTheme.colorScheme.surfaceContainer)
-    }
 
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
             .clip(shape)
-            .then(surfaceModifier),
+            .background(MaterialTheme.colorScheme.surfaceContainer),
         content = content,
     )
 }
