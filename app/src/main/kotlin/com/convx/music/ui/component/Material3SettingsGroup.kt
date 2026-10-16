@@ -60,27 +60,14 @@ fun Material3SettingsGroup(
             )
         }
 
-        // Use the app backdrop for one shared liquid-glass surface rather than
-        // making every row a separate glass layer.
+        // Keep settings groups on a solid surface instead of capturing the
+        // app backdrop for every card during settings navigation.
         val cardShape = RoundedCornerShape(AppleTokens.CardCorner)
-        val glassConfig = LocalGlassEffectConfig.current
-        val useGlass = glassConfig.globalEnabled && isGlassAllowed()
-        val surfaceModifier = if (useGlass) {
-            Modifier.liquidGlass(
-                config = glassConfig,
-                shape = cardShape,
-                applyEdgeEffects = false,
-            )
-        } else {
-            Modifier
-                .clip(cardShape)
-                .background(MaterialTheme.colorScheme.surfaceContainer)
-        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(cardShape)
-                .then(surfaceModifier)
+                .background(MaterialTheme.colorScheme.surfaceContainer)
         ) {
             items.forEachIndexed { index, item ->
                 if (index > 0) {
