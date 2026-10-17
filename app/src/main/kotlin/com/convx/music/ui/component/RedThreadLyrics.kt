@@ -15,6 +15,12 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.togetherWith
@@ -46,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.convx.music.R
 import com.convx.music.lyrics.LyricsEntry
+import kotlin.math.PI
 
 private data class RedThreadFrame(
     val trackId: String,
@@ -76,6 +83,19 @@ fun RedThreadLyrics(
     val isNightScene = scene == 2 || scene == 4
     val nightPalette = isNightScene && isSynced && usableLineIndex >= 0
     val animationsEnabled = ValueAnimator.areAnimatorsEnabled()
+    val ambientPhase = if (animationsEnabled) {
+        rememberInfiniteTransition(label = "redThreadAmbient").animateFloat(
+            initialValue = 0f,
+            targetValue = (2.0 * PI).toFloat(),
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = 10_000, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart,
+            ),
+            label = "redThreadAmbientPhase",
+        ).value
+    } else {
+        0f
+    }
     val backgroundColor by animateColorAsState(
         targetValue = if (nightPalette) RedThreadNight else RedThreadPaper,
         animationSpec = tween(480),
@@ -94,6 +114,15 @@ fun RedThreadLyrics(
     } else {
         0f
     }
+    val animatedThreadProgress = if (animationsEnabled) {
+        animateFloatAsState(
+            targetValue = threadProgress,
+            animationSpec = tween(durationMillis = 140),
+            label = "redThreadPlaybackProgress",
+        ).value
+    } else {
+        threadProgress
+    }
 
     Box(
         modifier = modifier
@@ -102,9 +131,10 @@ fun RedThreadLyrics(
     ) {
         RedThreadBackdrop(
             scene = scene,
-            progress = threadProgress,
+            progress = animatedThreadProgress,
             hasActiveLine = activeLine != null,
             isNightScene = nightPalette,
+            animationPhase = ambientPhase,
         )
 
         Column(

@@ -11,6 +11,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import com.convx.music.ui.utils.Motion
@@ -32,6 +34,7 @@ import androidx.navigation.compose.dialog
 import androidx.navigation.navArgument
 import com.convx.music.ui.utils.LocalNavAnimatedVisibilityScope
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
 import com.convx.music.ui.utils.morphContainer
 import com.convx.music.ui.utils.hasMorphSource
@@ -576,49 +579,68 @@ private fun NavGraphBuilder.sharedComposable(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
     content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
-) = composable(
-    route = route,
-    arguments = arguments,
-    enterTransition = { fadeIn(tween(1)) },
-    exitTransition = { fadeOut(tween(180), targetAlpha = 0.7f) },
-    popEnterTransition = { fadeIn(tween(180), initialAlpha = 0.7f) },
-    popExitTransition = { fadeOut(tween(1)) },
-) { entry ->
-    CompositionLocalProvider(LocalNavAnimatedVisibilityScope provides this) {
-        val morphId = entry.morphArtworkId()
-        // `morphContainer` no-ops with no id (deep link, restored back stack), and
-        // also finds no partner to interpolate from when the id's tile never called
-        // `sharedArtworkSource` -- a bespoke card rendering its own AsyncImage instead
-        // of going through one of Items.kt's shared composables. Both cases used to
-        // fall all the way back to the bare fadeIn(1) above: an instant pop with no
-        // motion at all. `animateEnterExit` is the generic, cheap fallback for both:
-        // a soft grow-and-fade that costs nothing but a graphicsLayer scale (no
-        // shared-element matching, no tile identity needed) -- which is the whole
-        // point: every tile-opened screen gets SOME grow-in, not only the ones that
-        // were wired into the shared-artwork system.
-        //
-        // Gated on `!hasMorphSource`, not id == null -- stacking this on TOP of an id
-        // that IS driving a real container morph would scale the card twice
-        // (morphContainer's own interpolation, then this fallback's 0.94 on top of
-        // it), which reads as the card overshooting past its target and snapping back.
-        val hasRealMorph = morphId != null && hasMorphSource(morphId)
-        Box(
-            Modifier
-                .morphContainer(morphId, isSource = false)
-                .then(
-                    if (!hasRealMorph) {
-                        Modifier.animateEnterExit(
-                            // enter (push, never gesture-driven): spring is fine.
-                            enter = fadeIn(Motion.appear()) + scaleIn(Motion.appear(), initialScale = 0.94f),
-                            // exit (pop, predictive-back-scrubbed): tween, see appearExit().
-                            exit = fadeOut(Motion.appearExit()) + scaleOut(Motion.appearExit(), targetScale = 0.94f),
+) {
+    val isSettingsDestination = route == Screens.Settings.route || route.startsWith("settings/")
+    composable(
+        route = route,
+        arguments = arguments,
+        enterTransition = {
+            if (isSettingsDestination) EnterTransition.None else fadeIn(tween(1))
+        },
+        exitTransition = {
+            if (isSettingsDestination) ExitTransition.None else fadeOut(tween(180), targetAlpha = 0.7f)
+        },
+        popEnterTransition = {
+            if (isSettingsDestination) EnterTransition.None else fadeIn(tween(180), initialAlpha = 0.7f)
+        },
+        popExitTransition = {
+            if (isSettingsDestination) ExitTransition.None else fadeOut(tween(1))
+        },
+    ) { entry ->
+        CompositionLocalProvider(LocalNavAnimatedVisibilityScope provides this) {
+            if (isSettingsDestination) {
+                // Settings pages have no shared-artwork pair. Keep their lists and
+                // controls out of the nested scale/fade animation layer.
+                Box(Modifier.fillMaxSize()) {
+                    content(entry)
+                }
+            } else {
+                val morphId = entry.morphArtworkId()
+                // `morphContainer` no-ops with no id (deep link, restored back stack), and
+                // also finds no partner to interpolate from when the id's tile never called
+                // `sharedArtworkSource` -- a bespoke card rendering its own AsyncImage instead
+                // of going through one of Items.kt's shared composables. Both cases used to
+                // fall all the way back to the bare fadeIn(1) above: an instant pop with no
+                // motion at all. `animateEnterExit` is the generic, cheap fallback for both:
+                // a soft grow-and-fade that costs nothing but a graphicsLayer scale (no
+                // shared-element matching, no tile identity needed) -- which is the whole
+                // point: every tile-opened screen gets SOME grow-in, not only the ones that
+                // were wired into the shared-artwork system.
+                //
+                // Gated on `!hasMorphSource`, not id == null -- stacking this on TOP of an id
+                // that IS driving a real container morph would scale the card twice
+                // (morphContainer's own interpolation, then this fallback's 0.94 on top of
+                // it), which reads as the card overshooting past its target and snapping back.
+                val hasRealMorph = morphId != null && hasMorphSource(morphId)
+                Box(
+                    Modifier
+                        .morphContainer(morphId, isSource = false)
+                        .then(
+                            if (!hasRealMorph) {
+                                Modifier.animateEnterExit(
+                                    // enter (push, never gesture-driven): spring is fine.
+                                    enter = fadeIn(Motion.appear()) + scaleIn(Motion.appear(), initialScale = 0.94f),
+                                    // exit (pop, predictive-back-scrubbed): tween, see appearExit().
+                                    exit = fadeOut(Motion.appearExit()) + scaleOut(Motion.appearExit(), targetScale = 0.94f),
+                                )
+                            } else {
+                                Modifier
+                            }
                         )
-                    } else {
-                        Modifier
-                    }
-                )
-        ) {
-            content(entry)
+                ) {
+                    content(entry)
+                }
+            }
         }
     }
 }

@@ -183,6 +183,8 @@ import com.convx.music.constants.HidePlayerThumbnailKey
 import com.convx.music.constants.HideVolumeBarKey
 import com.convx.music.constants.EnableLyricsThumbnailPlayPauseKey
 import com.convx.music.constants.KeepScreenOn
+import com.convx.music.constants.LyricsAnimationStyle
+import com.convx.music.constants.LyricsAnimationStyleKey
 import com.convx.music.constants.PlayerBackgroundStyle
 import com.convx.music.constants.PlayerBackgroundStyleKey
 import com.convx.music.constants.PlayerGradientAngleKey
@@ -3429,6 +3431,11 @@ fun InlineLyricsView(
     val context = LocalContext.current
     val database = LocalDatabase.current
     val dataSaver by rememberPreference(DataSaverEnabledKey, false)
+    val lyricsAnimationStyle by rememberEnumPreference(
+        LyricsAnimationStyleKey,
+        LyricsAnimationStyle.APPLE,
+    )
+    val isRedThread = lyricsAnimationStyle == LyricsAnimationStyle.RED_THREAD
 
     LaunchedEffect(mediaMetadata?.id, currentLyrics, showLyrics, dataSaver) {
         if (showLyrics && !dataSaver && mediaMetadata != null && currentLyrics == null) {
@@ -3454,7 +3461,9 @@ fun InlineLyricsView(
     Box (
         modifier = Modifier
             .fillMaxSize()
-            .clip(RoundedCornerShape(12.dp)),
+            .then(
+                if (isRedThread) Modifier else Modifier.clip(RoundedCornerShape(12.dp))
+            ),
         contentAlignment = Alignment.Center
     ) {
         when {
@@ -3473,7 +3482,11 @@ fun InlineLyricsView(
                 val lyricsContent: @Composable () -> Unit = {
                     Lyrics(
                         sliderPositionProvider = positionProvider,
-                        modifier = Modifier.padding(horizontal = 24.dp),
+                        modifier = if (isRedThread) {
+                            Modifier.fillMaxSize()
+                        } else {
+                            Modifier.padding(horizontal = 24.dp)
+                        },
                         showLyrics = showLyrics
                     )
                 }

@@ -15,6 +15,8 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
+import kotlin.math.cos
+import kotlin.math.sin
 
 @Composable
 internal fun RedThreadBackdrop(
@@ -22,6 +24,7 @@ internal fun RedThreadBackdrop(
     progress: Float,
     hasActiveLine: Boolean,
     isNightScene: Boolean,
+    animationPhase: Float = 0f,
 ) {
     val grain = remember {
         List(112) { index ->
@@ -40,6 +43,8 @@ internal fun RedThreadBackdrop(
         } else {
             RedThreadInk.copy(alpha = 0.12f)
         }
+        val motion = sin(animationPhase.toDouble()).toFloat()
+        val counterMotion = cos(animationPhase.toDouble()).toFloat()
 
         grain.forEachIndexed { index, point ->
             drawCircle(
@@ -86,16 +91,20 @@ internal fun RedThreadBackdrop(
                 )
             }
             2 -> {
+                val orbitCenter = Offset(
+                    x = w * (0.78f + 0.025f * motion),
+                    y = h * (0.71f + 0.014f * counterMotion),
+                )
                 drawCircle(
                     color = RedThreadVermilion.copy(alpha = 0.28f),
-                    radius = w * 0.26f,
-                    center = Offset(w * 0.78f, h * 0.71f),
+                    radius = w * (0.26f + 0.012f * motion),
+                    center = orbitCenter,
                     style = Stroke(width = 1.1.dp.toPx()),
                 )
                 drawCircle(
-                    color = RedThreadVermilion.copy(alpha = 0.68f),
-                    radius = 2.5.dp.toPx(),
-                    center = Offset(w * 0.78f, h * 0.71f),
+                    color = RedThreadVermilion.copy(alpha = 0.55f + 0.25f * counterMotion),
+                    radius = (2.3f + 0.9f * (motion + 1f)).dp.toPx(),
+                    center = orbitCenter,
                 )
             }
             3 -> {
@@ -128,7 +137,7 @@ internal fun RedThreadBackdrop(
             }
         }
 
-        val y = h * 0.79f
+        val y = h * (0.79f + 0.007f * motion)
         val threadPoints = listOf(
             Offset(w * 0.075f, y),
             Offset(w * 0.31f, y - h * 0.018f),

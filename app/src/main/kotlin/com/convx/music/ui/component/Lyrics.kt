@@ -729,7 +729,9 @@ fun Lyrics(
         contentAlignment = Alignment.TopCenter,
         modifier = modifier
             .fillMaxSize()
-            .padding(bottom = 12.dp)
+            .padding(
+                bottom = if (lyricsAnimationStyle == LyricsAnimationStyle.RED_THREAD) 0.dp else 12.dp
+            )
     ) {
         FilledTonalButton(
             onClick = {
