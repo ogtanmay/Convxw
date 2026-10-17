@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.SwitchColors
+import androidx.compose.material3.Switch as MaterialSwitch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -120,17 +122,15 @@ fun GlassSwitch(
 }
 
 /**
- * Signature-compatible stand-in for Material3's `Switch`, so a screen can adopt
- * [GlassSwitch] by aliasing its import rather than rewriting every call site:
+ * Compatibility adapter for screens that alias this as Material3's `Switch`.
+ * Uses the native Material 3 switch whenever glass is disabled:
  *
  * ```
  * import com.convx.music.ui.component.GlassSwitchCompat as Switch
  * ```
  *
- * [thumbContent] and [colors] are accepted and deliberately ignored — the glass
- * switch draws its own thumb and takes its track from the glass config, so the
- * check/close icons and Material color roles the call sites pass have nothing to
- * apply to.
+ * With glass enabled, the simple custom switch retains its existing appearance.
+ * In basic settings mode, all Material 3 colors and thumb content are preserved.
  */
 @Composable
 fun GlassSwitchCompat(
@@ -141,6 +141,18 @@ fun GlassSwitchCompat(
     enabled: Boolean = true,
     colors: SwitchColors? = null,
 ) {
+    if (!LocalGlassEffectConfig.current.globalEnabled) {
+        MaterialSwitch(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            modifier = modifier,
+            enabled = enabled,
+            colors = colors ?: SwitchDefaults.colors(),
+            thumbContent = thumbContent,
+        )
+        return
+    }
+
     // Delegates to [GlassSwitch] rather than LiquidToggle. LiquidToggle attaches
     // its own backdrop to the track so the thumb can refract it — a real glass
     // pipeline per toggle, and every preference switch in the app comes through

@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import com.convx.music.ui.utils.morphContainer
 import com.convx.music.ui.utils.hasMorphSource
 import com.convx.music.ui.utils.morphArtworkId
+import com.convx.music.ui.component.LocalGlassEffectConfig
 import com.convx.music.ui.screens.settings.HomeFeedOrderScreen
 import com.convx.music.ui.screens.artist.ArtistAlbumsScreen
 import com.convx.music.ui.screens.artist.ArtistItemsScreen
@@ -599,10 +600,13 @@ private fun NavGraphBuilder.sharedComposable(
     ) { entry ->
         CompositionLocalProvider(LocalNavAnimatedVisibilityScope provides this) {
             if (isSettingsDestination) {
-                // Settings pages have no shared-artwork pair. Keep their lists and
-                // controls out of the nested scale/fade animation layer.
-                Box(Modifier.fillMaxSize()) {
-                    content(entry)
+                // Settings use standard Material controls and surfaces even when
+                // the rest of the app has liquid glass enabled.
+                val basicSettingsGlassConfig = LocalGlassEffectConfig.current.copy(globalEnabled = false)
+                CompositionLocalProvider(LocalGlassEffectConfig provides basicSettingsGlassConfig) {
+                    Box(Modifier.fillMaxSize()) {
+                        content(entry)
+                    }
                 }
             } else {
                 val morphId = entry.morphArtworkId()

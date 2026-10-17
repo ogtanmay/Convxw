@@ -1200,7 +1200,7 @@ fun BottomSheetPlayer(
         },
         background = {
             val glassConfig = LocalGlassEffectConfig.current
-            val glassActive = isGlassAllowed()
+            val glassActive = glassConfig.globalEnabled && isGlassAllowed()
             
             Box(
                 modifier = Modifier

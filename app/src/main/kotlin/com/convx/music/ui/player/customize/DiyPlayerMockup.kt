@@ -115,7 +115,7 @@ fun DiyPlayerMockup(
 ) {
     val style = rememberMockupStyle()
     val glassConfig = LocalGlassEffectConfig.current
-    val glassActive = isGlassAllowed()
+    val glassActive = glassConfig.globalEnabled && isGlassAllowed()
 
     // Same frosted-chrome trick as ArtistScreen/AlbumScreen: this editor is a NavHost
     // destination, so liquidGlass must NOT sample the root appBackdrop (that capture
